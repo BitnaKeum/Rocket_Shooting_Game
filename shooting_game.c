@@ -24,40 +24,40 @@ int main()
 
 	while (1) {
 
-		printf("당신이 선택할 난이도는? \n");
-		printf("1.Easy 2.Normal 3.Hard\n");
+		printf("Choose level. \n");
+		printf("1.Easy 2.Normal 3.Hard\n\n");
 		printf("select: ");
 		scanf_s("%d", &level);
 		system("cls");
 
 		draw_rectangle(20, 20);
 		gotoxy(42, 2);
-		printf("스페이스키를 누르면");
-		gotoxy(42, 3);
-		printf("미사일이 발사됩니다.");
+		printf("Press space key to shoot");
+		//gotoxy(42, 3);
+		//printf("미사일이 발사됩니다.");
 		gotoxy(42, 5);
-		printf("횟수 : %d", count);
+		printf("Count : %d", count);
 		gotoxy(42, 6);
-		printf("성공 : %d", hit);
+		printf("Shot : %d", hit);
 
 		if (level == 1) {
 			while (1) {
 
-				gotoxy(49, 5);
+				gotoxy(50, 5);
 				printf("%d", count);
 
 				srand((unsigned)time(NULL));
 				ranNum = 2 * ((rand() % 18) + 1) + 1;
 				gotoxy(ranNum, 2);
-				printf("□");
-				//목표물 생성
+				printf("□");	//target
+				
 				game_control(&hit, ranNum);
 
 				if (count == 10)
 					break;
 
 				gotoxy(1, 22);
-				printf("아무키나 누르면 다음 진행 ... ");
+				printf("Press any key to continue ...");
 				_getch();
 				gotoxy(1, 22);
 				printf("                              ");
@@ -67,7 +67,7 @@ int main()
 			}
 
 			gotoxy(42, 8);
-			printf("최종 점수 : %d", hit);
+			printf("Final score : %d", hit);
 
 			gotoxy(1, 22);
 			break;
@@ -76,21 +76,21 @@ int main()
 		else if (level == 2) {
 			while (1) {
 
-				gotoxy(49, 5);
+				gotoxy(50, 5);
 				printf("%d", count);
 
 				srand((unsigned)time(NULL));
 				ranNum = 2 * ((rand() % 18) + 1) + 1;
 				gotoxy(ranNum, 2);
-				printf("□");
-				//목표물 생성
+				printf("□");	//target
+				
 				game_control2(&hit, &ranNum);
 
 				if (count == 10)
 					break;
 
 				gotoxy(1, 22);
-				printf("아무키나 누르면 다음 진행 ... ");
+				printf("Press any key to continue ...");
 				_getch();
 				gotoxy(1, 22);
 				printf("                              ");
@@ -100,7 +100,7 @@ int main()
 			}
 
 			gotoxy(42, 8);
-			printf("최종 점수 : %d", hit);
+			printf("Final score : %d", hit);
 
 			gotoxy(1, 22);
 			break;
@@ -109,14 +109,14 @@ int main()
 		else if (level == 3) {
 			while (1) {
 
-				gotoxy(49, 5);
+				gotoxy(50, 5);
 				printf("%d", count);
 
 				srand((unsigned)time(NULL));
 				ranNum = 2 * ((rand() % 18) + 1) + 1;
 				gotoxy(ranNum, 2);
-				printf("□");
-				//목표물 생성
+				printf("□");	// target
+				
 
 				srand((unsigned)time(NULL));
 				obs = 2 * ((rand() % 9) + 1) + 1;
@@ -134,7 +134,7 @@ int main()
 					break;
 
 				gotoxy(1, 22);
-				printf("아무키나 누르면 다음 진행 ... ");
+				printf("Press any key to continue ...");
 				_getch();
 				gotoxy(1, 22);
 				printf("                              ");
@@ -148,14 +148,14 @@ int main()
 			}
 
 			gotoxy(42, 8);
-			printf("최종 점수 : %d", hit);
+			printf("Final score : %d", hit);
 
 			gotoxy(1, 22);
 			break;
 		}
 
 		else {
-			printf("다시 입력하세요");
+			printf("Enter again.");
 			continue;
 		}
 	}
@@ -165,11 +165,10 @@ int main()
 
 void title(void)
 {
-	printf("미사일 게임 \n\n");
-	printf("비행기를 이동하면서\n");
-	printf("목표물(□)을 맞추는 게임입니다.\n");
-	printf("미사일은 스페이스키로 발사합니다.\n\n");
-	printf("아무키나 누르면 시작합니다.");
+	printf("[Shooting game] \n\n");
+	printf("Moving rocket, shot target(□).\n");
+	printf("To shoot, press space key.\n\n");
+	printf("Press any key to start.");
 }
 
 void gotoxy(int x, int y)
@@ -182,7 +181,7 @@ void draw_rectangle(int row, int col)
 {
 	int i, j, k, l;
 	printf("┌");
-	for (i = 0; i < row*2 - 2; i++)
+	for (i = 0; i < row * 2 - 2; i++)
 		printf("─");
 	printf("┐\n");
 	for (j = 0; j < col - 2; j++) {
@@ -192,7 +191,7 @@ void draw_rectangle(int row, int col)
 		printf("│\n");
 	}
 	printf("└");
-	for (l = 0; l < row*2 - 2; l++)
+	for (l = 0; l < row * 2 - 2; l++)
 		printf("─");
 	printf("┘\n");
 }
@@ -288,7 +287,7 @@ void game_control(int* hit, int rnd)
 					printf("☆");
 					/*별표로 바뀜*/
 					gotoxy(42, 8);
-					printf("맞았습니다.");
+					printf("Shot!");
 					*hit += 1;
 					gotoxy(49, 6);
 					printf("%d", *hit);
@@ -298,7 +297,7 @@ void game_control(int* hit, int rnd)
 				}
 				else {
 					gotoxy(42, 8);
-					printf("실패       ");
+					printf("Fail       ");
 					gotoxy(i, 19);
 					printf("  ");
 				}
@@ -317,13 +316,13 @@ void game_control2(int* hit, int* rnd)
 
 	while (1) {
 		movement(&i, &k, 19, 1, 100);
-		//비행기 움직임
+		//rocket movement
 
 		movement(&*rnd, &r, 2, 2, 10);
 		movement2(&*rnd, &r);
-		//목표물 움직임1
+		//target movement1
 		movement(&*rnd, &r, 2, 2, 10);
-		//목표물 움직임2
+		//target movement2
 
 		if (_kbhit()) {
 			ch = _getch();
@@ -352,7 +351,7 @@ void game_control2(int* hit, int* rnd)
 					printf("☆");
 					/*별표로 바뀜*/
 					gotoxy(42, 8);
-					printf("맞았습니다.");
+					printf("Shot!");
 					*hit += 1;
 					gotoxy(49, 6);
 					printf("%d", *hit);
@@ -362,7 +361,7 @@ void game_control2(int* hit, int* rnd)
 				}
 				else {
 					gotoxy(42, 8);
-					printf("실패       ");
+					printf("Fail       ");
 					gotoxy(i, 19);
 					printf("  ");
 				}
@@ -370,11 +369,11 @@ void game_control2(int* hit, int* rnd)
 			}
 		}
 
-		movement2(&i, &k);
-		//비행기 움직임
+		movement2(&i, &k);	//rocket movement
+		
 
-		movement2(&*rnd, &r);
-		//목표물 움직임2
+		movement2(&*rnd, &r);	//target movement2
+			
 	}
 }
 
@@ -384,25 +383,25 @@ void game_control3(int* hit, int* rnd, int* obs, int* obs2)
 	char ch;
 
 	while (1) {
-		movement(&i, &k, 19, 1, 50);   //비행기 움직임
+		movement(&i, &k, 19, 1, 50);   //rocket movement
 
-		movement(&*rnd, &r, 2, 2, 5);  //목표물 움직임1
-		movement2(&*rnd, &r);          //목표물 움직임1
+		movement(&*rnd, &r, 2, 2, 5);  //target movement1
+		movement2(&*rnd, &r);          //target movement1
 
-		movement(&*obs, &a, 5, 3, 5);  //장애물1 움직임1
-		movement2(&*obs, &a);          //장애물1 움직임1
+		movement(&*obs, &a, 5, 3, 5);  //obstacle1 movement1
+		movement2(&*obs, &a);          //obstacle1 movement1
 
-		movement(&*obs2, &b, 8, 3, 5); //장애물2 움직임1
-		movement2(&*obs2, &b);         //장애물2 움직임1
+		movement(&*obs2, &b, 8, 3, 5); //obstacle2 movement1
+		movement2(&*obs2, &b);         //obstacle2 movement1
 
-		movement(&*rnd, &r, 2, 2, 5);  //목표물 움직임2
-		movement2(&*rnd, &r);          //목표물 움직임2
+		movement(&*rnd, &r, 2, 2, 5);  //rocket movement2
+		movement2(&*rnd, &r);          //rocket movement2
 
-		movement(&*obs, &a, 5, 3, 5);  //장애물1 움직임2
+		movement(&*obs, &a, 5, 3, 5);  //obstacle1 movement2
 
-		movement(&*obs2, &b, 8, 3, 5); //장애물2 움직임2
+		movement(&*obs2, &b, 8, 3, 5); //obstacle2 movement2
 
-		movement(&*rnd, &r, 2, 2, 5);  //목표물 움직임3
+		movement(&*rnd, &r, 2, 2, 5);  //rocket movement3
 
 		if (_kbhit()) {
 			ch = _getch();
@@ -435,7 +434,7 @@ void game_control3(int* hit, int* rnd, int* obs, int* obs2)
 					printf("☆");
 					/*별표로 바뀜*/
 					gotoxy(42, 8);
-					printf("맞았습니다.");
+					printf("Shot!");
 					*hit += 1;
 					gotoxy(49, 6);
 					printf("%d", *hit);
@@ -445,23 +444,23 @@ void game_control3(int* hit, int* rnd, int* obs, int* obs2)
 				}
 				else if (i == *obs && j == 5) {
 					gotoxy(i, 5);
-					printf("펑");
+					printf("BOOM");
 					gotoxy(42, 8);
-					printf("실패       ");
+					printf("Fail       ");
 					gotoxy(i, 19);
 					printf("  ");
 				}
 				else if (i == *obs2 && j == 8) {
 					gotoxy(i, 8);
-					printf("펑");
+					printf("BOOM");
 					gotoxy(42, 8);
-					printf("실패       ");
+					printf("Fail       ");
 					gotoxy(i, 19);
 					printf("  ");
 				}
 				else {
 					gotoxy(42, 8);
-					printf("실패       ");
+					printf("Fail       ");
 					gotoxy(i, 19);
 					printf("  ");
 				}
@@ -469,12 +468,12 @@ void game_control3(int* hit, int* rnd, int* obs, int* obs2)
 			}
 		}
 
-		movement2(&i, &k);             //비행기 움직임
+		movement2(&i, &k);             //rocket movement
 
-		movement2(&*obs, &a);          //장애물1 움직임2
+		movement2(&*obs, &a);          //obstacle1 movement2
 
-		movement2(&*obs2, &b);         //장애물2 움직임2
+		movement2(&*obs2, &b);         //obstacle2 movement2
 
-		movement2(&*rnd, &r);          //목표물 움직임3
+		movement2(&*rnd, &r);          //target movement3
 	}
 }
